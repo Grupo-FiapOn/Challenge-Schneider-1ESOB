@@ -1,6 +1,6 @@
 # Challenge-Schneider-1ESOB
 
-Repositório para o trabalho feito para o Challenge da Schneider 2023
+Repositório do trabalho feito para o Challenge da Schneider 2023
 
 ### Grupo:
 <li>Alessandra Vaiano (RM551497)</li>  
