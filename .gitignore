@@ -1,0 +1,47 @@
+# Ignore compiled files and directories
+node_modules/
+dist/
+build/
+
+# Ignore environment files
+.env
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore logs and temporary files
+logs/
+*.log
+*.tmp
+
+# Ignore user-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore backup files
+*~
+
+# Ignore sensitive or private information
+secrets/
+config.ini
+
+# Ignore compiled stylesheets
+*.css.map
+
+# Ignore compiled JavaScript
+*.js.map
+
+# Ignore cache and build files
+.cache/
+*.pyc
+
+# Ignore generated documentation
+docs/_build/
+
+# Ignore runtime and temporary files
+*.pyc
+__pycache__/
+
+# Ignore database files
+*.sqlite3
