@@ -3726,6 +3726,19 @@ textarea.form-control-lg {
   display: block;
 }
 
+.navbar-nav .nav-link[href="Tela de LOGIN.html"] {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 120px;
+  white-space: nowrap;
+}
+
 .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0.5rem;
