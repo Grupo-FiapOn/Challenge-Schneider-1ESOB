@@ -1,0 +1,171 @@
+<!-- Matheus Alexandre Zornig Pereira RM:551845-->
+<!-- versao commit Danilo 18h41 -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="../css/styles.css" rel="stylesheet" />
+</head>
+
+<body class="custom-login-body">
+
+    <div class="container custom-login-container">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+            <div class="row justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6">
+                <h1 class="text-center mb-4 custom-login-h1">Sustenta+</h1>
+
+                <!-- Abas (Tabs) -->
+                <ul class="nav nav-tabs mb-3 custom-login-nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="create-account-tab" data-bs-toggle="tab" href="#create-account">Criar
+                            Cadastro</a>
+                    </li>
+                </ul>
+
+                <!-- Conteúdo das Abas -->
+                <div class="tab-content">
+                    <!-- Tela de Login -->
+                    <div class="tab-pane fade show active" id="login">
+                        <form id="login-form">
+                            <div class="mb-3">
+                                <label for="email-login" class="form-label custom-login-form-label">Email:</label>
+                                <input type="email" class="form-control custom-login-form-control" id="email-login" placeholder="Digite seu email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password-login" class="form-label custom-login-form-label">Senha:</label>
+                                <input type="password" class="form-control custom-login-form-control" id="password-login" placeholder="Digite sua senha" required>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn custom-login-btn">Entrar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tela de Criação de Login -->
+                    <div class="tab-pane fade" id="create-account">
+                        <form id="create-account-form">
+                            <div class="mb-3">
+                                <label for="name" class="form-label custom-login-form-label">Nome:</label>
+                                <input type="text" class="form-control custom-login-form-control" id="name" placeholder="Digite seu nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label custom-login-form-label">Email:</label>
+                                <input type="email" class="form-control custom-login-form-control" id="email" placeholder="Digite seu email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label custom-login-form-label">Senha:</label>
+                                <input type="password" class="form-control custom-login-form-control" id="password" placeholder="Digite sua senha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm-password" class="form-label custom-login-form-label">Confirmar Senha:</label>
+                                <input type="password" class="form-control custom-login-form-control" id="confirm-password" placeholder="Confirme sua senha" required>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn custom-login-btn">Criar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Evento de envio do formulário de login
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            login();
+        });
+
+        // Evento de envio do formulário de criação de conta
+        document.getElementById('create-account-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            createUser();
+        });
+
+        // Função para alternar entre as abas
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-link').forEach(function (link) {
+                link.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-pane').forEach(function (pane) {
+                pane.classList.remove('show', 'active');
+            });
+            tab.classList.add('active');
+            document.querySelector(tab.getAttribute('href')).classList.add('show', 'active');
+        }
+
+        // Evento de clique nas abas
+        document.querySelectorAll('.nav-link').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                switchTab(this);
+            });
+        });
+
+        // Função para verificar o login
+        function login() {
+            const email = document.getElementById('email-login').value;
+            const password = document.getElementById('password-login').value;
+
+            // Verificar se o usuário existe no LocalStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                // Login bem-sucedido
+                //alert('Login bem-sucedido!');
+                // Redirecionar para a página desejada
+                window.location.href = '../index.html';
+            } else {
+                // Login falhou
+                alert('Login falhou. Verifique seu email e senha.');
+            }
+        }
+
+        // Função para criar um novo usuário
+        function createUser() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Verificar se todos os campos foram preenchidos
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Preencha todos os campos!');
+                return;
+            }
+
+            // Verificar se a senha e a confirmação de senha correspondem
+            if (password !== confirmPassword) {
+                alert('A senha e a confirmação de senha não correspondem!');
+                return;
+            }
+
+            const user = { name, email, password };
+
+            // Armazenar o usuário no LocalStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Limpar o formulário
+            document.getElementById('create-account-form').reset();
+
+            // Exibir feedback positivo para o usuário
+            alert('Usuário criado com sucesso!');
+        }
+    </script>
+</body>
+
+</html>
